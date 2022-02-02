@@ -38,12 +38,15 @@ export const fetchCoffeeStores = async (
   return (
     data?.results?.map((venue, idx) => {
       // <------
+      const neighbourhood = venue.location.neighborhood;
       return {
         id: venue.fsq_id, // <------
         address: venue.location.address || '',
         name: venue.name,
         neighbourhood:
-          venue.location.neighborhood || venue.location.crossStreet || '',
+          (neighbourhood && neighbourhood.length > 0 && neighbourhood[0]) ||
+          venue.location.cross_street ||
+          '',
         imgUrl: photos[idx],
       };
     }) || []

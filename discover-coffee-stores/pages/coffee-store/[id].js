@@ -37,13 +37,8 @@ export async function getStaticPaths() {
   };
 }
 
-const CoffeeStore = (initialProps) => {
+const CoffeeStoreComp = (initialProps) => {
   const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   const id = router.query.id;
 
   const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore);
@@ -181,6 +176,16 @@ const CoffeeStore = (initialProps) => {
       </div>
     </div>
   );
+};
+
+const CoffeeStore = (initialProps) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
+  return <CoffeeStoreComp {...initialProps} />;
 };
 
 export default CoffeeStore;

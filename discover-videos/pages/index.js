@@ -2,8 +2,26 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Banner from '../components/banner/banner';
 import NavBar from '../components/nav/navbar';
+import SectionCards from '../components/card/section-cards';
 
-export default function Home() {
+import { getVideos, getPopularVideos } from '../lib/video';
+
+export async function getServerSideProps(context) {
+  const disneyVideos = await getVideos('disney trailer');
+  const productivityVideos = await getVideos('Productivity');
+  const travelVideos = await getVideos('travel');
+  const popularVideos = await getPopularVideos();
+  return {
+    props: { disneyVideos, productivityVideos, travelVideos, popularVideos },
+  };
+}
+
+export default function Home({
+  disneyVideos,
+  productivityVideos,
+  travelVideos,
+  popularVideos,
+}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,15 +30,26 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NavBar username="user@example.com" />
+      <div className={styles.main}>
+        <NavBar username="user@example.com" />
 
-      <Banner
-        title="Clifford the red dog"
-        subTitle="a very cute dog"
-        imgUrl="/static/clifford.webp"
-      />
+        <Banner
+          title="Clifford the red dog"
+          subTitle="a very cute dog"
+          imgUrl="/static/clifford.webp"
+        />
 
-      {/* <Card /> */}
+        <div className={styles.sectionWrapper}>
+          <SectionCards title="Disney" size="large" videos={disneyVideos} />
+          <SectionCards title="Travel" size="small" videos={travelVideos} />
+          <SectionCards
+            title="Productivity"
+            size="medium"
+            videos={productivityVideos}
+          />
+          <SectionCards title="Popular" size="small" videos={popularVideos} />
+        </div>
+      </div>
     </div>
   );
 }

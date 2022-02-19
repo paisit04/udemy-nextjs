@@ -4,7 +4,7 @@ import Banner from '../components/banner/banner';
 import NavBar from '../components/nav/navbar';
 import SectionCards from '../components/card/section-cards';
 
-import { getVideos, getPopularVideos } from '../lib/video';
+import { getVideos, getPopularVideos } from '../lib/videos';
 
 export async function getServerSideProps(context) {
   const disneyVideos = await getVideos('disney trailer');
@@ -34,6 +34,7 @@ export default function Home({
         <NavBar />
 
         <Banner
+          videoId="4zH5iYM4wJo"
           title="Clifford the red dog"
           subTitle="a very cute dog"
           imgUrl="/static/clifford.webp"

@@ -91,7 +91,6 @@ export async function isNewUser(token, issuer) {
   }
 `;
 
-  // console.log({ issuer });
   const response = await queryHasuraGQL(
     operationsDoc,
     'isNewUser',

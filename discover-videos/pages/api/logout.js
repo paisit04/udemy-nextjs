@@ -12,7 +12,6 @@ export default async function logout(req, res) {
     removeTokenCookie(res);
     try {
       await magicAdmin.users.logoutByIssuer(userId);
-      console.log('logoutByIssuer');
     } catch (error) {
       console.log("User's session with Magic already expired");
       console.error('Error occurred while logging out magic user', error);

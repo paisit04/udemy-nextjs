@@ -23,7 +23,6 @@ const Card = (props) => {
   };
 
   const handleOnError = () => {
-    console.log('handleOnError');
     setImgSrc(DEFAULT_IMG_URL);
   };
 

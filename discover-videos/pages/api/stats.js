@@ -8,7 +8,6 @@ import { verifyToken } from '../../lib/utils';
 export default async function stats(req, resp) {
   try {
     const token = req.cookies.token;
-    console.log({ token });
     if (!token) {
       resp.status(403).send({});
     } else {

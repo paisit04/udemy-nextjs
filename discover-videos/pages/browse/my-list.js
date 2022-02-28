@@ -8,16 +8,6 @@ import styles from '../../styles/MyList.module.css';
 
 export async function getServerSideProps(context) {
   const { userId, token } = await useRedirectUser(context);
-  if (!userId) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/login',
-        permanent: false,
-        // statusCode: 301
-      },
-    };
-  }
   const videos = await getMyList(userId, token);
 
   return {
